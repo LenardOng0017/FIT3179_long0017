@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": "container",
+    "layer": [
+        {"data": {
+            "url":
+            "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_year.csv"
+        },
+        "transform": [
+            {
+                "filter": "datum['State'] !== 'Malaysia'"
+            },
+            {
+                "filter": "datum['Year'] <= 2020"
+            },
+            {
+                "calculate": "datum['State'] + '_' + datum['Year']",
+                "as": "state_year"
+            },
+            {
+                "lookup": "state_year",
+                "from": {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_population_by_state_year.csv",
+                        "name": "tot_pop"
+                    },
+                    "key": "state_year",
+                    "fields": ["population"]
+                }
+            },
+            {
+                "calculate": "parseInt(datum['Number of death']) / (parseInt(datum['population']) * 1000) * 100000",
+                "as": "total_deaths_per_100000"
+            },
+            {
+            "window": [
+                {"op": "rank", "as": "rank"}
+            ],
+            "sort": [{"field": "total_deaths_per_100000", "order": "descending"}],
+            "groupby": ["Year"]
+            }
+        ],
+        "mark": {"type": "line", "point": true},
+        "encoding": {
+            "x": {
+                "field": "Year", 
+                "type": "quantitative",
+                "scale": {"domain": [2001,2020]}
+            },
+            "y": {"field": "rank", "type": "nominal"},
+            "order": {"field": "State", "type": "ordinal"},
+            "color": {
+                "field": "State",
+                "type": "nominal",
+                "legend": {"title": "State", "format": ""},
+                "scale": {
+                    "range": [
+                        "#1E90FF", "#E31A1C", "#008000", "#6A3D9A", "#FF7F00", "#000000",
+                        "#FFD700", "#87CEEB", "#FB9A99", "#98FB98", "#CAB2D6", "#FDBF6F",
+                        "#B3B3B3", "#F0E68C", "#800000", "#FF83FA", "#FF1493", "#0000FF",
+                        "#36648B", "#00CED1", "#00FF00", "#9ACD32", "#FFFF00", "#8B4500", "#A52A2A"
+                    ]
+                }
+            }
+        }
+    }
+    ]
+}

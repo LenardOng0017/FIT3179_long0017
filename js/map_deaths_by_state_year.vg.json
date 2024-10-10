@@ -1,0 +1,127 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": [
+        {
+            "name": "Year_selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "height": "container",
+    "width": "container",
+    "projection": { "type": "equirectangular" },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                "format": { "type": "topojson", "feature": "my" }
+            },
+            "transform": [
+                {
+                    "calculate": "'Data is not available in ' + datum.properties.name",
+                    "as": "note"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "fill": "#ddd",
+                "stroke": "white",
+                "strokeWidth": 1
+            },
+            "encoding": { "tooltip": { "field": "note" } }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_year.csv"
+            },
+            "transform": [
+                {
+                    "lookup": "State",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                            "format": { "type": "topojson", "feature": "my" }
+                        },
+                        "key": "properties.name"
+                    },
+                    "as": "geo"
+                },
+                {
+                    "filter": "datum['Year'] == Year_selection"
+                },
+                {
+                    "calculate": "datum['State'] + '_' + datum['Year']",
+                    "as": "state_year"
+                },
+                {
+                    "lookup": "state_year",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_population_by_state_year.csv",
+                            "name": "tot_pop"
+                        },
+                        "key": "state_year",
+                        "fields": ["population"]
+                    }
+                },
+                {
+                    "calculate": "parseInt(datum['Number of death']) / (parseInt(datum['population']) * 1000)",
+                    "as": "percentage_deaths"
+                }
+            ],
+            "mark": {
+                "type": "geoshape", 
+                "stroke": "#fff", 
+                "strokeWidth": 0.5
+            },
+            "encoding": {
+                "shape": { "field": "geo", "type": "geojson" },
+                "color": {
+                    "field": "percentage_deaths",
+                    "type": "quantitative",
+                    "title": "Deaths",
+                    "scale": { "domain": [0, 0.0009], "scheme": "reds" },
+                    "legend": { 
+                        "format": ".2%"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "State", 
+                        "type": "nominal", 
+                        "title": "State"
+                    },
+                    {
+                        "field": "population",
+                        "type": "quantitative",
+                        "title": "Population ('000)",
+                        "format": ","
+                    },
+                    {
+                        "field": "Number of death",
+                        "type": "quantitative",
+                        "title": "Deaths",
+                        "format": ","
+                    },
+                    {
+                        "field": "percentage_deaths",
+                        "type": "quantitative",
+                        "title": "Percentage Deaths",
+                        "format": "%"
+                    },
+                    {
+                        "field": "Year", 
+                        "type": "quantitative", 
+                        "title": "Year"
+                    }
+                ]
+            }
+        }
+    ]
+}

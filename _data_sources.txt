@@ -1,0 +1,11 @@
+deaths by state and sex data:
+https://archive.data.gov.my/data/dataset/death-by-state-sex-and-age-group-malaysia/resource/c7ae3dd7-b2aa-4458-ad10-877099ac9089
+
+map shapefile:
+https://simplemaps.com/gis/country/my#admin1
+
+population data:
+https://data.gov.my/data-catalogue/population_state
+
+data cleaning python program:
+clean_data.py

@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": [
+        {
+            "name": "Year_selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        },
+        {
+            "name": "State_selection",
+            "value": "null",
+            "bind": {
+                "input": "select",
+                "options": ["Malaysia", "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Selangor", "Terengganu", "Sabah", "Sarawak", "Kuala Lumpur"],
+                "name": "State: "
+            }
+        }
+    ],
+    "data": {
+        "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_sex.csv"
+    },
+    "transform": [
+        { "filter": "datum.Year == Year_selection" },
+        { "filter": "State_selection == 'null' ? datum.State == 'Malaysia' : datum.State == State_selection" },
+        { "calculate": "datum.Sex == 'Female' ? 'Female' : 'Male'", "as": "gender" },
+        { "calculate": "datum.Sex == 'Female' ? -datum['Number of death'] : datum['Number of death']", "as": "signed_deaths" }
+    ],
+    "width": "container",
+    "height": "container",
+    "mark": "bar",
+    "encoding": {
+        "y": {
+            "field": "Age group",
+            "sort": [
+                "Under 1 year", "1-4", "5-9", "10-14", "15-19", 
+                "20-24", "25-29", "30-34", "35-39", "40-44", 
+                "45-49", "50-54", "55-59", "60-64", "65-69", 
+                "70-74", "75-79", "80-84", "85 +"
+            ]
+        },
+        "x": {
+            "aggregate": "sum", 
+            "field": "signed_deaths", 
+            "title": "Number of deaths"
+        },
+        "color": {
+            "field": "gender",
+            "scale": { "range": ["#bb3333", "#333399"] },
+            "legend": { "title": null }
+        }
+    }
+}

@@ -1,0 +1,182 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": [
+        {
+            "name": "Year_selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        },
+        {
+            "name": "State_selection",
+            "value": "null",
+            "bind": {"input": "select", "options": ["Malaysia", "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Penang", "Perak", "Perlis", "Selangor", "Terengganu", "Sabah", "Sarawak", "Kuala Lumpur"],
+    "name": "State: "}
+        }  
+    ],
+    "vconcat": [
+        {
+            "title": "Deaths per 100000 People by State in Malaysia (2001-2020)",
+            "width": 1000,
+            "height": 350,
+            "projection": { "type": "equirectangular" },
+            "layer": [
+                {
+                    "data": {
+                        "url":
+                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                        "format": {"type": "topojson", "feature": "my"}
+                    },
+                    "transform": [
+                        {
+                            "calculate": "'Data is not available in ' +datum.properties.name",
+                            "as": "note"
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape",
+                        "fill": "#ddd",
+                        "stroke": "white",
+                        "strokeWidth": 1
+                    },
+                    "encoding": {"tooltip": {"field": "note"}}
+                },
+                {
+                    "data": {
+                        "url":
+                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_year.csv"
+                    },
+                    "transform": [
+                        {
+                            "lookup": "State",
+                            "from": {
+                                "data": {
+                                    "url":
+                                    "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                                    "format": { "type": "topojson", "feature": "my" }
+                                },
+                                "key": "properties.name"
+                            },
+                            "as": "geo"
+                        },
+                        {
+                            "filter": "datum['Year'] == Year_selection"
+                        },
+                        {
+                            "calculate": "datum['State'] + '_' + datum['Year']",
+                            "as": "state_year"
+                        },
+                        {
+                            "lookup": "state_year",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_population_by_state_year.csv",
+                                    "name": "tot_pop"
+                                },
+                                "key": "state_year",
+                                "fields": ["population"]
+                            }
+                        },
+                        {
+                            "calculate": "parseInt(datum['Number of death']) / (parseInt(datum['population']) * 1000) * 100000",
+                            "as": "total_deaths_per_100000"
+                        }
+                    ],
+                    "mark": {
+                        "type": "geoshape", 
+                        "stroke": "#fff", 
+                        "strokeWidth": 0.5
+                    },
+                    "encoding": {
+                        "shape": {"field": "geo", "type": "geojson"},
+                        "color": {
+                            "field": "total_deaths_per_100000",
+                            "type": "quantitative",
+                            "title": "Deaths",
+                            "scale": {"domain": [25, 100], "scheme": "reds"},
+                            "legend": {"format": ".2s"}
+                        },
+                        "tooltip": [
+                            {
+                                "field": "State", 
+                                "type": "nominal", 
+                                "title": "State"
+                            },
+                            {
+                                "field": "population",
+                                "type": "quantitative",
+                                "title": "Population ('000)",
+                                "format": ","
+                            },
+                            {
+                                "field": "Number of death",
+                                "type": "quantitative",
+                                "title": "Deaths",
+                                "format": ","
+                            },
+                            {
+                                "field": "total_deaths_per_100000",
+                                "type": "quantitative",
+                                "title": "Deaths per 100000",
+                                "format": ","
+                            },
+                            {
+                                "field": "Year", 
+                                "type": "quantitative", 
+                                "title": "Year"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "hconcat": [
+              {
+                "title": "",
+                "width": 500,
+                "mark": "text"
+              },
+              {
+                  "data": {"url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_sex.csv"},
+                  "transform": [
+                      {"filter": "datum.Year == Year_selection"},
+                      {"filter": "State_selection == 'null' ? datum.State == 'Malaysia' : datum.State == State_selection"},
+                      {"calculate": "datum.Sex == 'Female' ? 'Female' : 'Male'", "as": "gender"},
+                      {"calculate": "datum.Sex == 'Female' ? -datum['Number of death'] : datum['Number of death']", "as": "signed_deaths"}
+                  ],
+                  "width": 300,
+                  "height": 200,
+                  "mark": "bar",
+                  "encoding": {
+                  "y": {
+                      "field": "Age group",
+                      "sort": [
+                          "Under 1 year", "1-4", "5-9", "10-14", "15-19", 
+                          "20-24", "25-29", "30-34", "35-39", "40-44", 
+                          "45-49", "50-54", "55-59", "60-64", "65-69", 
+                          "70-74", "75-79", "80-84", "85 +"
+                      ]
+                  },
+                  "x": {
+                      "aggregate": "sum", 
+                      "field": "signed_deaths", 
+                      "title": "Number of deaths"
+                  },
+                  "color": {
+                      "field": "gender",
+                      "scale": {"range": ["#aa3333", "#3333aa"]},
+                      "legend": {"title": null}
+                  }
+            }
+        }
+            ]
+        }
+        
+    ]
+}

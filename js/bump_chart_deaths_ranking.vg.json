@@ -5,7 +5,7 @@
     "layer": [
         {"data": {
             "url":
-            "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_year.csv"
+            "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/data/my_deaths_by_state_year.csv"
         },
         "transform": [
             {

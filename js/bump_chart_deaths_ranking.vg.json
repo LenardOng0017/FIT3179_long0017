@@ -22,7 +22,7 @@
                 "lookup": "state_year",
                 "from": {
                     "data": {
-                        "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_population_by_state_year.csv",
+                        "url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/data/my_population_by_state_year.csv",
                         "name": "tot_pop"
                     },
                     "key": "state_year",

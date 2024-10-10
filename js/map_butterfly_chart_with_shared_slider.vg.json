@@ -29,7 +29,7 @@
                 {
                     "data": {
                         "url":
-                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/js/my.topojson",
                         "format": {"type": "topojson", "feature": "my"}
                     },
                     "transform": [
@@ -49,7 +49,7 @@
                 {
                     "data": {
                         "url":
-                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_year.csv"
+                        "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/data/my_deaths_by_state_year.csv"
                     },
                     "transform": [
                         {
@@ -57,7 +57,7 @@
                             "from": {
                                 "data": {
                                     "url":
-                                    "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my.topojson",
+                                    "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/js/my.topojson",
                                     "format": { "type": "topojson", "feature": "my" }
                                 },
                                 "key": "properties.name"
@@ -143,7 +143,7 @@
                 "mark": "text"
               },
               {
-                  "data": {"url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/my_deaths_by_state_sex.csv"},
+                  "data": {"url": "https://raw.githubusercontent.com/LenardOng0017/FIT3179_long0017/refs/heads/main/data/my_deaths_by_state_sex.csv"},
                   "transform": [
                       {"filter": "datum.Year == Year_selection"},
                       {"filter": "State_selection == 'null' ? datum.State == 'Malaysia' : datum.State == State_selection"},

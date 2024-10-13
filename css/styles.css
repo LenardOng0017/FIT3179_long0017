@@ -1,11 +1,26 @@
-/* body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    margin: 0;
-	background-color: black;
-} */
+.base {
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: dimgrey;
+}
+
+.contentContainer {
+	justify-content: space-between;
+	padding: 5%;
+	background-color: antiquewhite;
+}
+
+.sbsContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.sbsContainer > div {
+	flex-grow: 1; /* Allow divs to grow and take up available space */
+}
 
 .title {
 	text-align: center;
@@ -16,27 +31,9 @@
 }
 
 .subtitle {
-	text-align: center;
+	text-align: left;
 	font-size: 2.5em;
-}
-
-.contentContainer {
-	justify-content: space-between;
-	padding: 5%;
-	background-color: antiquewhite;
-}
-
-.visContainer {
-	display: flex;
-}
-
-.sbsContainer {
-	display: flex;
-	justify-content: space-between;
-	/* flex-grow: 1; */
-	align-items: flex-start;
 	padding-left: 5%;
-	padding-right: 5%;
 }
 
 .body {
@@ -46,32 +43,13 @@
 	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.base {
-	margin-left: 10%;
-	margin-right: 10%;
-	background-color: dimgrey;
-}
-
 #titleMain {
 	text-align: center;
 	font-size: 3.5em;
 }
 
-#subtitleIntro {
-	text-align: left;
-	font-size: 2.5em;
-	padding-left: 5%;
-}
-
-#subtitleBody2 {
-	text-align: left;
-	font-size: 2.5em;
-	padding-left: 5%;
-}
-
 #bodyIntro {
 	text-align: justify;
-	font-size: 1.75em;
 }
 
 #mapTitle {
@@ -106,15 +84,18 @@
 	background-color: white;
 }
 
-#bodyP1 {
-	text-align: justify;
+#bodyButterfly {
+	text-align: left;
 	display: flex;
-	width: 40%;
-	line-height:calc(1 * 3vw);
+	width: 15%;
+	padding-left: 0%;
+	padding-right: 0%;
+	word-spacing: -0.1em;
+	line-height:calc(5px + 2vw);
 }
 
 #bumpTitle {
-	width: 99%;
+	width: 94%;
 	text-align: center;
 	font-size: 2em;
 	background-color: white;
@@ -125,10 +106,3 @@
 	height: 500px;
 	background-color: white;
 }
-
-.sbsContainer > div {
-	flex-grow: 1; /* Allow divs to grow and take up available space */
-}
-
-
-

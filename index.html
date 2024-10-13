@@ -2,115 +2,94 @@
 <html lang="en">
 
 <head>
-    <!-- <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-    <!-- <script src="my_deaths_choropleth.js"></script> -->
-
-    <!-- <title>Proportional Symbol Map</title> -->
     <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 </head>
 
 <body class="base">
     <div class="contentContainer">
-        <h1 class="title" , id="titleMain">Mortality Rates in Malaysia</h1>
+        <div>
+            <h1 class="title" , id="titleMain">Mortality Rates in Malaysia</h1>
 
-        <h2 class="subtitle" , id="subtitleIntro">
-            A look into the past...
-        </h2>
+            <h2 class="subtitle">
+                A look into the past...
+            </h2>
 
-        <p class="body" , id="bodyIntro">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-            Curabitur sagittis, elit ut vehicula suscipit, nunc odio scelerisque felis, vel pellentesque massa
-            arcu a dolor. Nulla facilisi. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in
-            faucibus orci luctus et ultrices posuere cubilia curae; Ut scelerisque, odio nec varius tincidunt,
-            elit magna facilisis odio, at fringilla nisi justo et leo. Suspendisse potenti. Aenean nec sagittis
-            ipsum.
-        </p>
-        <!-- <p class="body" , id="bodyIntro">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-            Curabitur sagittis, elit ut vehicula suscipit, nunc odio scelerisque felis, vel pellentesque massa
-            arcu a dolor. Nulla facilisi. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in
-            faucibus orci luctus et ultrices posuere cubilia curae; Ut scelerisque, odio nec varius tincidunt,
-            elit magna facilisis odio, at fringilla nisi justo et leo. Suspendisse potenti. Aenean nec sagittis
-            ipsum. Nulla facilisi. Fusce condimentum, odio ut consectetur cursus, erat purus dignissim est,
-            vitae hendrerit mi augue et nunc. Maecenas sit amet sapien at nunc convallis dictum at ac quam.
-            Proin viverra urna at leo dictum, at tincidunt est sollicitudin. Integer quis magna eu lorem
-            vulputate tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-            turpis egestas. Donec fringilla justo et metus vestibulum, sit amet luctus orci faucibus.
-            Duis vehicula ipsum ac lorem scelerisque vehicula. Nulla efficitur egestas sem, ac tristique metus
-            scelerisque at.
-        </p> -->
+            <p class="body" , id="bodyIntro">
+                With ongoing advancements in technology and healthcare, the people of Malaysia have seen an
+                increase in life expectancy alongside a growing population. As a whole, how has the people
+                of Malaysia fared in terms of mortality rates over the years?
+            </p>
 
-        <!-- <div id="shared_slider_idioms"></div>
-        <script type="text/javascript">
-            var spec = "js/map_butterfly_chart_with_shared_slider.vg.json";
-            vegaEmbed('#shared_slider_idioms', spec).then(function(result) {
-                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-            }).catch(console.error);
-        </script> -->
-
-        <div id="mapContainer">
-            <div class="subtitle" , id="mapTitle">
-                Percentage Deaths in Malaysia by State (2001 - 2020)
-            </div>
-
-            <div id="my_deaths_map"></div>
-            <script type="text/javascript">
-                var spec = "js/map_deaths_by_state_year.vg.json";
-                vegaEmbed('#my_deaths_map', spec).then(function (result) {
-                    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-                }).catch(console.error);
-            </script>
-        </div>
-        <br>
-
-        <div class="sbsContainer">
-            <div class="body" , id="bodyP1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-                Curabitur sagittis, elit ut vehicula suscipit, nunc odio scelerisque felis, vel pellentesque massa
-                arcu a dolor. Nulla facilisi. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in
-                faucibus orci luctus et ultrices posuere cubilia curae; Ut scelerisque, odio nec varius tincidunt,
-                elit magna facilisis odio, at fringilla nisi justo et leo. Suspendisse potenti.
-            </div>
             <div>
-                <div class="subtitle" , id="butterflyTitle">
-                    Deaths by Gender and Age Group
+                <div class="subtitle" , id="mapTitle">
+                    Percentage Deaths in Malaysia by State (2001 - 2020)
                 </div>
-                <div id="my_deaths_butterfly_chart"></div>
+
+                <div id="my_deaths_map"></div>
                 <script type="text/javascript">
-                    var spec = "js/butterfly_chart_deaths_by_age_group_sex.vg.json";
-                    vegaEmbed('#my_deaths_butterfly_chart', spec).then(function (result) {
+                    var spec = "js/map_deaths_by_state_year.vg.json";
+                    vegaEmbed('#my_deaths_map', spec).then(function (result) {
                         // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
                     }).catch(console.error);
                 </script>
             </div>
-
         </div>
 
-        <h2 class="subtitle" , id="subtitleBody2">
-            A Comparison
-        </h2>
+        <div>
+            <br>
+            <div class="body" , id="bodyIntro">
+                <p>
+                    Although the total population is growing, the death rates have been increasing overall.
+                </p>
+                <p>
+                    Additionally, the states in the northern region of Malaysia have seen a higher percentage of deaths.
+                    That said, does age or gender play a role in the mortality rates in Malaysia?
+                </p>
+            </div>
+            <br>
 
-        <div class="body" , id="bodyP2">
-            Integer quis magna eu lorem
-            vulputate tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-            turpis egestas. Donec fringilla justo et metus vestibulum, sit amet luctus orci faucibus.
-            Duis vehicula ipsum ac lorem scelerisque vehicula. Nulla efficitur egestas sem, ac tristique metus
-            scelerisque at.
+            <div class="sbsContainer">
+                <div>
+                    <div class="subtitle" , id="butterflyTitle">
+                        Deaths by Gender and Age Group
+                    </div>
+                    <div id="my_deaths_butterfly_chart"></div>
+                    <script type="text/javascript">
+                        var spec = "js/butterfly_chart_deaths_by_age_group_sex.vg.json";
+                        vegaEmbed('#my_deaths_butterfly_chart', spec).then(function (result) {
+                            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+                        }).catch(console.error);
+                    </script>
+                </div>
+
+                <div class="body" , id="bodyButterfly">
+                    Observing the data reveals that women generally have a longer life expectancy compared to men.
+                    <br><br>
+                    Overall, the number of deaths of lower age groups have remained relatively stable over the
+                    years compared to the continuous increase for that of higher age groups.
+                </div>
+            </div>
         </div>
 
-        <br>
+        <div>
+            <h2 class="subtitle">
+                Making A Comparison
+            </h2>
 
-        <div class="sbsContainer">
+            <div class="body">
+                We know that the mortality rates have been increasing over the years, and that gender and age has a
+                non-negligible effect on it. But how does each state compare to the rest in terms of deaths, and
+                have any state seen a significant increase in deaths as to change it's ranking over the years?
+            </div>
+
+            <br>
             <div>
                 <div class="subtitle" , id="bumpTitle">
-                    Deaths Ranking by State
+                    Mortality Rate Ranking by State
                 </div>
                 <div id="my_deaths_bump_chart"></div>
                 <script type="text/javascript">
@@ -121,30 +100,57 @@
                 </script>
             </div>
 
-
-            <div class="body" , id="bodyP1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
-                Curabitur sagittis, elit ut vehicula suscipit, nunc odio scelerisque felis, vel pellentesque massa
-                arcu a dolor. Nulla facilisi. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in
-                faucibus orci luctus et ultrices posuere cubilia curae; Ut scelerisque, odio nec varius tincidunt,
-                elit magna facilisis odio, at fringilla nisi justo et leo.
+            <div class="body">
+                <p>
+                    Most states maintained similar rankings over the years, with notable exceptions of Sabah, Sarawak,
+                    Melaka and Pulau Pinang, which have all seen final changes in ranking of at least 3 positions.
+                </p>
+                <p>
+                    Negeri Sembilan in particular has seen great fluctuations in ranking over the years, but ultimately
+                    ended 2020 in a rank similar to that in 2001.
+                </p>
             </div>
         </div>
 
-        <p>
-            Dataset sources:
-            <br><br>
-            deaths by state and sex data:<br>
-            https://archive.data.gov.my/data/dataset/death-by-state-sex-and-age-group-malaysia/resource/c7ae3dd7-b2aa-4458-ad10-877099ac9089
-            <br><br>
-            map shapefile:<br>
-            https://simplemaps.com/gis/country/my#admin1
-            <br><br>
-            population data:<br>
-            https://data.gov.my/data-catalogue/population_state
+        <div>
+            <h2 class="subtitle">
+                The Future
+            </h2>
 
-        </p>
+            <p class="body">
+                Even with the advancements in technology and healthcare, we can expect the mortality rates to continue
+                increasing as the population grows. 
+            </p>
+            <p class="body"> 
+                However, with a better understanding of the trends and patterns of 
+                mortality rates in Malaysia, more informed decisions can be made to improve the quality of life, and 
+                consequently the life expectancy for the people of the country.
+            </p>
+        </div>
 
+        <hr>
+        <div>
+            <p>
+                Author: Lenard Ong (32951280)
+                <br>
+                Date: 13 Oct 2024
+                <br><br>
+                Dataset sources:
+                <br><br>
+                Deaths by state and sex data:<br>
+                https://archive.data.gov.my/data/dataset/death-by-state-sex-and-age-group-malaysia/resource/c7ae3dd7-b2aa-4458-ad10-877099ac9089
+                <br> Date accessed: 1 Oct 2024
+                <br><br>
+                Map shapefile:<br>
+                https://simplemaps.com/gis/country/my#admin1
+                <br> Date accessed: 1 Oct 2024
+                <br><br>
+                Population data:<br>
+                https://data.gov.my/data-catalogue/population_state
+                <br> Date accessed: 1 Oct 2024
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>

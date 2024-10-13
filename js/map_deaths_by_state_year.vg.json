@@ -86,9 +86,15 @@
                     "field": "percentage_deaths",
                     "type": "quantitative",
                     "title": "Deaths",
-                    "scale": { "domain": [0, 0.0009], "scheme": "reds" },
+
+                    "scale": {
+                        "domain": [     0.0003,   0.00065,   0.0007,   0.00075,   0.00085],
+                        "range": ["#fee5d9","#fcbba1","#fc9272","#fb6a4a","#de2d26","#a50f15"],
+                        "type": "threshold"
+                    },
+
                     "legend": { 
-                        "format": ".2%"
+                        "format": ".3%"
                     }
                 },
                 "tooltip": [

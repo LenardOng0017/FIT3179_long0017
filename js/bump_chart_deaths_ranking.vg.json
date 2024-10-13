@@ -30,14 +30,14 @@
                 }
             },
             {
-                "calculate": "parseInt(datum['Number of death']) / (parseInt(datum['population']) * 1000) * 100000",
-                "as": "total_deaths_per_100000"
+                "calculate": "parseInt(datum['Number of death']) / (parseInt(datum['population']) * 1000)",
+                "as": "percentage_deaths"
             },
             {
             "window": [
                 {"op": "rank", "as": "rank"}
             ],
-            "sort": [{"field": "total_deaths_per_100000", "order": "descending"}],
+            "sort": [{"field": "percentage_deaths", "order": "descending"}],
             "groupby": ["Year"]
             }
         ],
@@ -62,7 +62,13 @@
                         "#36648B", "#00CED1", "#00FF00", "#9ACD32", "#FFFF00", "#8B4500", "#A52A2A"
                     ]
                 }
-            }
+            },
+            "tooltip": [
+                {"field": "State", "type": "nominal", "title": "State"},
+                {"field": "Year", "type": "quantitative", "title": "Year"},
+                {"field": "percentage_deaths", "type": "quantitative", "title": "Percentage Deaths", "format": ".4%"},
+                {"field": "rank", "type": "ordinal", "title": "Rank"}
+            ]
         }
     }
     ]

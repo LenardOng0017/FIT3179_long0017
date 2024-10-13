@@ -53,6 +53,12 @@
             "field": "gender",
             "scale": { "range": ["#bb3333", "#333399"] },
             "legend": { "title": null }
-        }
+        },
+        "tooltip": [
+            { "field": "State", "type": "nominal" },
+            { "field": "Year", "type": "quantitative" },
+            { "field": "Age group", "type": "ordinal" },
+            { "field": "Number of death", "type": "quantitative", "title": "Deaths"}
+        ]
     }
 }
